@@ -1,0 +1,9 @@
+.basic-link {
+  @apply cursor-pointer transition duration-300 hover:opacity-70 hover:scale-[0.98];
+}
+
+.modal {
+  &-error {
+    @apply text-sm font-normal text-red-500 animate-pulse;
+  }
+}

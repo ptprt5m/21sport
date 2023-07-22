@@ -27,7 +27,7 @@ export const Header = () => (
                                 </div>
                             </div>
                             <div className='hidden lg:block'>
-                                <Menu links={MenuLinks} />
+                                <Menu />
                             </div>
                             <div className='block lg:hidden'>
                                 <BurgerButton />

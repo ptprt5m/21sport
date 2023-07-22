@@ -1,5 +1,8 @@
 export interface IMenu {
-    links: Array<IMenuLinks>
+    products: IMenuLinks,
+    basket: IMenuLinks,
+    favorites: IMenuLinks,
+    profile: IMenuLinks,
 }
 
 export interface IMenuLinks {

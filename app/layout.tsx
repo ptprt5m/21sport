@@ -1,8 +1,10 @@
 import './globals.css'
+import './style.scss'
 import type { Metadata } from 'next'
 import {Montserrat} from 'next/font/google'
 import { Header } from "@/app/Components";
 import type {ReactNode} from "react";
+import {GlobalProvider} from "@/app/Redux/provider";
 
 const montserrat = Montserrat({
   subsets: ['cyrillic', 'latin'],
@@ -22,11 +24,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
-        <Header />
-        <main>{children}</main>
-        <footer>lolo</footer>
-      </body>
+      <GlobalProvider>
+        <body className={montserrat.className}>
+          <Header />
+          <main>{children}</main>
+          <footer>lolo</footer>
+        </body>
+      </GlobalProvider>
     </html>
   )
 }

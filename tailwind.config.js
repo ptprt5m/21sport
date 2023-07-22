@@ -20,6 +20,21 @@ module.exports = {
       },
       fontFamily: {
         'montserrat': ['Montserrat']
+      },
+      animation: {
+        'open': 'open 0.2s linear',
+      },
+      keyframes: {
+        open: {
+          from: {
+            opacity: 0,
+            transform: 'scale(0)'
+          },
+          to: {
+            opacity: 1,
+            transform: 'scale(1)'
+          },
+        }
       }
     },
   },
