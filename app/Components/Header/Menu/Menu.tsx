@@ -3,37 +3,65 @@
 import type {FC} from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import {useSelector} from "react-redux";
-import {RootState} from "@/app/Redux/store";
+import {useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "@/app/Redux/store";
 import {MenuLinks} from "@/app/Data";
 import {ModalWrapper} from "@/app/Components/Modal/ModalWrapper";
+import { close } from '@/app/Redux/Features/menu/menuSlice';
 import React from "react";
+import clsx from "clsx";
+import {AuthorizationModalWrapper} from "@/app/Components/Modal/Authorization/AuthorizationModalWrapper";
 
 export const Menu: FC = () => {
     const auth = useSelector((state: RootState) => state.auth)
+    const isMobile = useSelector((state: RootState) => state.menu.isOpen)
+    const dispatch = useDispatch<AppDispatch>()
+
     return (
-        <nav className='flex justify-between items-center text-lg font-light'>
-            <Link className='hover:opacity-75 duration-300 transition hover:scale-105 mr-10' href={MenuLinks.products.href}>
-                {MenuLinks.products.title}
+        <nav className={clsx({
+            'flex justify-between items-center text-lg font-light': true,
+            'flex-col text-slate-600 gap-10': isMobile
+        })}>
+            <Link className={clsx({
+                'basic-link': true,
+                'mr-10': !isMobile,
+                'text-xl font-medium': isMobile
+            })} href={MenuLinks.products.href}>
+                {isMobile ? <span onClick={() => dispatch(close())}>{MenuLinks.products.title}</span> : MenuLinks.products.title}
             </Link>
-            <Link className="hover:opacity-75 duration-300 transition hover:scale-105 bg-[url('/basket.svg')] bg-no-repeat pl-10 mr-10" href={MenuLinks.basket.href}>
-                {MenuLinks.basket.title}
+            <Link
+                className={clsx({
+                    'basic-link': true,
+                    "mr-10 bg-[url('/basket.svg')] bg-no-repeat pl-10 mr-10": !isMobile,
+                    'text-xl font-medium': isMobile
+                })}
+                href={MenuLinks.basket.href}>
+                {isMobile ? <span onClick={() => dispatch(close())}>Корзина</span> : MenuLinks.basket.title}
             </Link>
-            <Link className='hover:opacity-75 duration-300 transition hover:scale-105 mr-10' href={MenuLinks.favorites.href}>
-                <Image src={MenuLinks.favorites.icon?.src} width={35} height={35} alt={MenuLinks.favorites.title} />
+            <Link className={clsx({
+                'basic-link': true,
+                'mr-10': !isMobile,
+                'text-xl font-medium': isMobile
+            })} href={MenuLinks.favorites.href}>
+                {isMobile ? <span onClick={() => dispatch(close())}>{MenuLinks.favorites.title}</span> : <Image src={MenuLinks.favorites.icon?.src ?? ''} width={35} height={35} alt={MenuLinks.favorites.title} />}
             </Link>
-
-
-
             {auth.isAuth ?
-                <Link className='hover:opacity-75 duration-300 transition hover:scale-105' href={MenuLinks.profile.href}>
-                    <Image src={MenuLinks.profile.icon?.src} width={35} height={35} alt={MenuLinks.profile.title} />
+                <Link className={clsx({
+                    'basic-link': true,
+                    'text-xl font-medium': isMobile
+                })} href={MenuLinks.profile.href}>
+                    {isMobile ? <span onClick={() => dispatch(close())}>{MenuLinks.profile.title}</span> : <Image src={MenuLinks.profile.icon?.src ?? ''} width={35} height={35} alt={MenuLinks.profile.title} />}
                 </Link> :
                 <ModalWrapper actionTitle={
-                    <Link href='/?modal=true'>
-                        <Image className='hover:opacity-75 duration-300 transition hover:scale-105 cursor-pointer' src={MenuLinks.profile.icon?.src} width={35} height={35} alt={MenuLinks.profile.title} />
+                    <Link href='/?modal=true' className={clsx({
+                        'basic-link': true,
+                        'text-xl font-medium': isMobile
+                    })}>
+                        {isMobile ? MenuLinks.profile.title : <Image className='basic-link' src={MenuLinks.profile.icon?.src ?? ''} width={35} height={35} alt={MenuLinks.profile.title} />}
                     </Link>
-                } title='Войдите или зарегистрируйтесь, чтобы продолжить' />
+                } title='Войдите или зарегистрируйтесь, чтобы продолжить'>
+                    <AuthorizationModalWrapper />
+                </ModalWrapper>
             }
         </nav>
     );

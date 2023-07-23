@@ -3,12 +3,10 @@
 import React, {useState} from 'react';
 import {Formik} from "formik";
 import Image from "next/image";
-import helloIcon from "../../../public/emoji/hello.png"
+import helloIcon from "../../../../public/emoji/hello.png"
 import {BasicButton} from "@/app/Components/Common";
 
-
-
-export const AuthModal = () => {
+export const AuthModal = ({ toggleForm }) => {
     const [error, setError] = useState('')
     return (
         <div className='mt-5 flex flex-col w-full h-auto items-center'>
@@ -88,7 +86,7 @@ export const AuthModal = () => {
                             </div>
                             <span className='modal-error'>{errors.password && touched.password && errors.password}</span>
                         </div>
-                        <span className='mb-3.5 basic-link'>Нет аккаунта? Зарегистрируйтесь</span>
+                        <span className='mb-3.5 basic-link' onClick={toggleForm}>Нет аккаунта? Зарегистрируйтесь</span>
                         <BasicButton type='submit' disabled={isSubmitting} title='Войти' className='bg-green-600' />
                     </form>
                 )}

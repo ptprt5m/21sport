@@ -2,10 +2,12 @@
 
 import {configureStore} from "@reduxjs/toolkit";
 import authReducer from './Features/auth/authSlice';
+import menuReducer from './Features/menu/menuSlice';
 
 export const store = configureStore({
     reducer: {
-        auth: authReducer
+        auth: authReducer,
+        menu: menuReducer
     }
 })
 

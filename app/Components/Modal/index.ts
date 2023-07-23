@@ -1,2 +1,2 @@
 export * from './ModalWrapper'
-export * from './AuthModal'
+export * from './Authorization'

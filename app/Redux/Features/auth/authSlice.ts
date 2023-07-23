@@ -37,7 +37,6 @@ export const auth = createSlice({
             return initialState
         },
         logIn: (state, action: PayloadAction<AuthState>) => {
-            debugger
             return {
                 ...state,
                 isAuth: true,

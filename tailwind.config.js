@@ -21,9 +21,6 @@ module.exports = {
       fontFamily: {
         'montserrat': ['Montserrat']
       },
-      animation: {
-        'open': 'open 0.2s linear',
-      },
       keyframes: {
         open: {
           from: {
@@ -34,8 +31,20 @@ module.exports = {
             opacity: 1,
             transform: 'scale(1)'
           },
+        },
+        fromBottomToTop: {
+          from: {
+            transform: 'translateY(100%)'
+          },
+          to: {
+            transform: 'translateY(0%)'
+          }
         }
-      }
+      },
+      animation: {
+        'open': 'open 0.2s linear',
+        'fromBottomToTop': 'fromBottomToTop 0.2s linear'
+      },
     },
   },
   plugins: [],
