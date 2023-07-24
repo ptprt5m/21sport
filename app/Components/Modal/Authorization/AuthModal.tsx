@@ -5,6 +5,7 @@ import {Formik} from "formik";
 import Image from "next/image";
 import helloIcon from "../../../../public/emoji/hello.png"
 import {BasicButton} from "@/app/Components/Common";
+import Link from "next/link";
 
 export const AuthModal = ({ toggleForm }) => {
     const [error, setError] = useState('')
@@ -86,7 +87,7 @@ export const AuthModal = ({ toggleForm }) => {
                             </div>
                             <span className='modal-error'>{errors.password && touched.password && errors.password}</span>
                         </div>
-                        <span className='mb-3.5 basic-link' onClick={toggleForm}>Нет аккаунта? Зарегистрируйтесь</span>
+                        <Link href='/?modal=true&content=reg' className='mb-3.5 basic-link'>Нет аккаунта? Зарегистрируйтесь</Link>
                         <BasicButton type='submit' disabled={isSubmitting} title='Войти' className='bg-green-600' />
                     </form>
                 )}

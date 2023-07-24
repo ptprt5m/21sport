@@ -53,7 +53,7 @@ export const Menu: FC = () => {
                     {isMobile ? <span onClick={() => dispatch(close())}>{MenuLinks.profile.title}</span> : <Image src={MenuLinks.profile.icon?.src ?? ''} width={35} height={35} alt={MenuLinks.profile.title} />}
                 </Link> :
                 <ModalWrapper actionTitle={
-                    <Link href='/?modal=true' className={clsx({
+                    <Link href='/?modal=true&content=auth' className={clsx({
                         'basic-link': true,
                         'text-xl font-medium': isMobile
                     })}>

@@ -5,6 +5,7 @@ import {Formik} from "formik";
 import Image from "next/image";
 import helloIcon from "../../../../public/emoji/hello.png"
 import {BasicButton} from "@/app/Components/Common";
+import Link from "next/link";
 
 export const RegistrationModal = ({ toggleForm }) => {
     const [error, setError] = useState('')
@@ -121,7 +122,7 @@ export const RegistrationModal = ({ toggleForm }) => {
                                 <label className='absolute bg-white text-gray-700 text-md left-4 px-2 pointer-events-none top-2.5 duration-300 transform -translate-y-6 scale-75 z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2.5 peer-focus:scale-75 peer-focus:-translate-y-6' htmlFor="reg_firstName">Имя</label>
                             </div>
                         </div>
-                        <span className='mb-3.5 basic-link' onClick={toggleForm}>Уже есть аккаунт? Войдите</span>
+                        <Link href='/?modal=true&content=auth' className='mb-3.5 basic-link'>Уже есть аккаунт? Войдите</Link>
                         <BasicButton type='submit' disabled={isSubmitting} title='Создать аккаунт' className='bg-blue-600' />
                     </form>
                 )}

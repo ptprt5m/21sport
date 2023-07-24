@@ -1,9 +1,7 @@
 'use client'
 
-import React, {type FC, type ReactNode, useEffect, useState} from 'react';
+import React, {type FC, type ReactNode, useCallback, useEffect, useState} from 'react';
 import {useRouter, useSearchParams} from "next/navigation";
-import {AuthModal} from "@/app/Components/Modal/Authorization/AuthModal";
-import {RegistrationModal} from "@/app/Components/Modal/Authorization/RegistrationModal";
 
 interface IModalWrapperProps {
     actionTitle?: string | ReactNode
@@ -12,28 +10,34 @@ interface IModalWrapperProps {
 }
 
 export const ModalWrapper: FC<IModalWrapperProps> = ({actionTitle, title, children}) => {
-    const [showModal, setShowModal] = useState(false);
     const router = useRouter();
     const searchParams = useSearchParams()
     const isModalOpen = searchParams.get('modal')
 
-    useEffect(() => {
-        if (!showModal && !isModalOpen) {
-            router.push('/')
+    const escFunction = useCallback((event: DocumentEventMap['keydown']) => {
+        if (event.key === 'Escape') {
+            router.push('/');
         }
-    }, [showModal, isModalOpen])
+    }, []);
+
+    useEffect(() => {
+        document.addEventListener('keydown', escFunction, false);
+
+        return () => {
+            document.removeEventListener('keydown', escFunction, false);
+        };
+    }, [escFunction]);
 
     const closeModal = () => {
-        setShowModal(false)
         router.push('/')
     }
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>
+            <button>
                 {actionTitle ?? 'Открыть'}
             </button>
-            {(showModal || isModalOpen) && (
+            {isModalOpen && (
                 <>
                     <div className="fixed inset-0 z-10 overflow-y-auto backdrop-blur-sm">
                         <div

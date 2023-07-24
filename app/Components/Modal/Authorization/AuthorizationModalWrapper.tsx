@@ -1,19 +1,18 @@
 'use client'
 
-import React, {useState} from 'react';
+import React from 'react';
 import { AuthModal} from "@/app/Components/Modal/Authorization/AuthModal";
 import {RegistrationModal} from "@/app/Components/Modal/Authorization/RegistrationModal";
+import {useSearchParams} from "next/navigation";
+import {Preloader} from "@/app/Components/Common";
 
 export const AuthorizationModalWrapper = () => {
-    const [isAuthForm, setIsAuthForm] = useState(true)
-
-    const toggleForm = () => {
-        setIsAuthForm(!isAuthForm)
-    }
+    const searchParams = useSearchParams()
+    const form = searchParams.get('content')
 
     return (
         <>
-            {isAuthForm ?  <AuthModal toggleForm={toggleForm}/> : <RegistrationModal toggleForm={toggleForm}/>}
+            {form === 'auth' ? <AuthModal /> : form === 'reg' ? <RegistrationModal /> : <Preloader />}
         </>
     );
 };
