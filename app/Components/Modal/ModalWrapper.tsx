@@ -1,7 +1,7 @@
 'use client'
 
-import React, {type FC, type ReactNode, useCallback, useEffect, useState} from 'react';
-import {useRouter, useSearchParams} from "next/navigation";
+import React, {type FC, type ReactNode, useCallback, useEffect} from 'react';
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 interface IModalWrapperProps {
     actionTitle?: string | ReactNode
@@ -11,6 +11,7 @@ interface IModalWrapperProps {
 
 export const ModalWrapper: FC<IModalWrapperProps> = ({actionTitle, title, children}) => {
     const router = useRouter();
+    const pathname = usePathname()
     const searchParams = useSearchParams()
     const isModalOpen = searchParams.get('modal')
 
@@ -29,7 +30,7 @@ export const ModalWrapper: FC<IModalWrapperProps> = ({actionTitle, title, childr
     }, [escFunction]);
 
     const closeModal = () => {
-        router.push('/')
+        router.push(pathname)
     }
 
     return (

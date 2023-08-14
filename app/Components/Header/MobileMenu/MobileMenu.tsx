@@ -15,7 +15,7 @@ export const MobileMenu = () => {
 
     return (
         <>
-            {isOpen && <div className='absolute top-0 left-0 w-screen h-screen p-6 bg-white animate-fromBottomToTop'>
+            {isOpen && <div className='absolute top-0 left-0 w-screen h-screen p-6 bg-white animate-fromRightToLeft'>
                 <div className='absolute text-center top-[20%] left-[20%] right-[20%]'>
                     <Link href='/' onClick={() => dispatch(close())} className='basic-link rounded-full flex flex-col items-center mb-10 drop-shadow-xl'>
                         <Logo size={80} className='w-20 h-20' isMobile={isOpen} />

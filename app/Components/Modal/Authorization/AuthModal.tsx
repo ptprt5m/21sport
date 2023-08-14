@@ -6,8 +6,11 @@ import Image from "next/image";
 import helloIcon from "../../../../public/emoji/hello.png"
 import {BasicButton} from "@/app/Components/Common";
 import Link from "next/link";
+import {usePathname} from "next/navigation";
+import {FormField} from "@/app/Components/Forms";
 
-export const AuthModal = ({ toggleForm }) => {
+export const AuthModal = () => {
+    const pathname = usePathname();
     const [error, setError] = useState('')
     return (
         <div className='mt-5 flex flex-col w-full h-auto items-center'>
@@ -53,23 +56,18 @@ export const AuthModal = ({ toggleForm }) => {
                       /* and other goodies */
                   }) => (
                     <form onSubmit={handleSubmit} className='mt-5 flex flex-col w-full items-center'>
-                        <div className='mb-6 max-w-sm w-full text-center'>
-                            <div className='relative'>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email_auth"
-                                    required
-                                    placeholder=' '
-                                    className='w-full rounded-lg border border-gray-700 py-2 px-5 appearance-none bg-transparent focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email}
-                                />
-                                <label className='absolute bg-white text-gray-700 text-md left-4 px-2 pointer-events-none top-2.5 duration-300 transform -translate-y-6 scale-75 z-10 origin-[0] peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2.5 peer-focus:scale-75 peer-focus:-translate-y-6' htmlFor="email_auth">Email</label>
-                            </div>
-                            <span className='modal-error'>{errors.email && touched.email && errors.email}</span>
-                        </div>
+
+                        <FormField
+                            id='email_auth'
+                            type='email'
+                            name='email'
+                            required
+                            label='Email'
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            errors={errors.email && touched.email && errors.email}
+                        />
                         <div className='mb-6 max-w-sm w-full text-center'>
                             <div className='relative'>
                                 <input
@@ -87,7 +85,7 @@ export const AuthModal = ({ toggleForm }) => {
                             </div>
                             <span className='modal-error'>{errors.password && touched.password && errors.password}</span>
                         </div>
-                        <Link href='/?modal=true&content=reg' className='mb-3.5 basic-link'>Нет аккаунта? Зарегистрируйтесь</Link>
+                        <Link href={pathname + '/?modal=true&content=reg'} className='mb-3.5 basic-link'>Нет аккаунта? Зарегистрируйтесь</Link>
                         <BasicButton type='submit' disabled={isSubmitting} title='Войти' className='bg-green-600' />
                     </form>
                 )}

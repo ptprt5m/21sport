@@ -11,7 +11,7 @@ export default function Home() {
     return (
         <>
             <div className={auth.isAuth ? 'hidden' : 'block'}>
-                <p>Не авторизированы</p>
+                <p>Не авторизованы</p>
             </div>
             <div className={auth.isAuth ? 'block' : 'hidden'}>
                 <p>

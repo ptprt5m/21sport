@@ -11,8 +11,10 @@ import { close } from '@/app/Redux/Features/menu/menuSlice';
 import React from "react";
 import clsx from "clsx";
 import {AuthorizationModalWrapper} from "@/app/Components/Modal/Authorization/AuthorizationModalWrapper";
+import {usePathname} from "next/navigation";
 
 export const Menu: FC = () => {
+    const pathname = usePathname();
     const auth = useSelector((state: RootState) => state.auth)
     const isMobile = useSelector((state: RootState) => state.menu.isOpen)
     const dispatch = useDispatch<AppDispatch>()
@@ -36,7 +38,7 @@ export const Menu: FC = () => {
                     'text-xl font-medium': isMobile
                 })}
                 href={MenuLinks.basket.href}>
-                {isMobile ? <span onClick={() => dispatch(close())}>Корзина</span> : MenuLinks.basket.title}
+                {isMobile ? <span onClick={() => dispatch(close())}>Корзина</span> : 0 + MenuLinks.basket.title}
             </Link>
             <Link className={clsx({
                 'basic-link': true,
@@ -53,7 +55,7 @@ export const Menu: FC = () => {
                     {isMobile ? <span onClick={() => dispatch(close())}>{MenuLinks.profile.title}</span> : <Image src={MenuLinks.profile.icon?.src ?? ''} width={35} height={35} alt={MenuLinks.profile.title} />}
                 </Link> :
                 <ModalWrapper actionTitle={
-                    <Link href='/?modal=true&content=auth' className={clsx({
+                    <Link href={pathname + '/?modal=true&content=auth'} className={clsx({
                         'basic-link': true,
                         'text-xl font-medium': isMobile
                     })}>

@@ -23,8 +23,8 @@ export const BurgerButton: FC = () => {
         <div className='flex relative lg:hidden'>
             <div
                 className={clsx({
-                    'space-y-1.5 [&>*:nth-child(1)]:w-1/2 [&>*:nth-child(3)]:w-4/5': !isOpen,
-                    '[&>*:nth-child(1)]:origin-bottom [&>*:nth-child(1)]:rotate-45 [&>*:nth-child(1)]:translate-y-0.5 [&>*:nth-child(2)]:origin-top [&>*:nth-child(2)]:-rotate-45 [&>*:nth-child(3)]:origin-bottom [&>*:nth-child(3)]:w-1/2 [&>*:nth-child(3)]:rotate-45 [&>*:nth-child(3)]:translate-x-3.5': isOpen,
+                    'button-burger_close': !isOpen,
+                    'button-burger_open': isOpen,
                 })}
                 onClick={toggleMobileMenu}
             >

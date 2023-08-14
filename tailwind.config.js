@@ -32,18 +32,18 @@ module.exports = {
             transform: 'scale(1)'
           },
         },
-        fromBottomToTop: {
+        fromRightToLeft: {
           from: {
-            transform: 'translateY(100%)'
+            transform: 'translateX(100%)'
           },
           to: {
-            transform: 'translateY(0%)'
+            transform: 'translateX(0%)'
           }
         }
       },
       animation: {
         'open': 'open 0.2s linear',
-        'fromBottomToTop': 'fromBottomToTop 0.2s linear'
+        'fromRightToLeft': 'fromRightToLeft 0.2s linear'
       },
     },
   },

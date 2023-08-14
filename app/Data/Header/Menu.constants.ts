@@ -6,7 +6,7 @@ export const MenuLinks: IMenu = {
         href: '/products',
     },
     basket: {
-        title: '10 000 руб.',
+        title: 'руб.',
         href: '/basket',
     },
     favorites: {

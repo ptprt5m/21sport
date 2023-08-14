@@ -42,7 +42,7 @@ export const auth = createSlice({
                 isAuth: true,
                 firstName: action.payload.firstName,
                 lastName: action.payload.lastName,
-                phoneNumber: action.payload.phoneNumber
+                phoneNumber: action.payload.phoneNumber,
             }
         },
         toggleIsFetching: (state, action) => {
