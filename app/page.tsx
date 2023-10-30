@@ -2,11 +2,17 @@
 
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "@/app/Redux/store";
-import {logIn, logOut} from "@/app/Redux/Features/auth/authSlice";
+import {getMe, logIn, logOut} from "@/app/Redux/Features/auth/authSlice";
+import {useEffect} from "react";
+import {api} from "@/app/pages/api";
 
 export default function Home() {
     const auth = useSelector((state: RootState) => state.auth)
     const dispatch = useDispatch<AppDispatch>()
+
+    useEffect(() => {
+        api.getMe()
+    }, [])
 
     return (
         <>
@@ -27,7 +33,7 @@ export default function Home() {
                     MiddleName: {auth.phoneNumber}
                 </p>
             </div>
-            <button onClick={() => dispatch(logIn({
+            <button className='bg-white text-black p-5 m-5' onClick={() => dispatch(logIn({
                 lastName: 'Sheglov',
                 firstName: 'Roman',
                 sex: 'Male',
@@ -35,7 +41,7 @@ export default function Home() {
             }))}>
                 login
             </button>
-            <button onClick={() => dispatch(logOut())}>
+            <button className='bg-white text-black p-5 m-5' onClick={() => dispatch(logOut())}>
                 logout
             </button>
         </>
