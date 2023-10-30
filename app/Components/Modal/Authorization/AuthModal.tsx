@@ -8,10 +8,15 @@ import {BasicButton} from "@/app/Components/Common";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {FormField} from "@/app/Components/Forms";
+import {login} from "@/app/Redux/Features/auth/authSlice";
+import {api} from "@/app/pages/api";
+
+interface IInitialValues { email: string, password: string}
 
 export const AuthModal = () => {
     const pathname = usePathname();
     const [error, setError] = useState('')
+    const initialValues: IInitialValues = { email: '', password: '' }
     return (
         <div className='mt-5 flex flex-col w-full h-auto items-center'>
             <div className='flex mb-5'>
@@ -20,7 +25,7 @@ export const AuthModal = () => {
             </div>
             <span className='text-base font-normal text-red-500'>{error}</span>
             <Formik
-                initialValues={{ email: '', password: '' }}
+                initialValues={initialValues}
                 validate={values => {
                     const errors = {};
                     if (!values.email) {
@@ -36,9 +41,11 @@ export const AuthModal = () => {
                     return errors;
                 }}
                 onSubmit={(values, { setSubmitting }) => {
-                    signIn(values).then(statusCode => {
+                    
+                    api.login(values).then(statusCode => {
+                        
                         if (statusCode === 'Успешно!') {
-                            navigate("/profile")
+
                         }
                         setError(statusCode)
                     })
